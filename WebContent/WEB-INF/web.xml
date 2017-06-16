@@ -17,6 +17,7 @@
 		<servlet-name>indexServlet</servlet-name>
 		<servlet-class>com.phonesaragao.servlet.IndexServlet</servlet-class>
 	</servlet>
+	
 
 	<servlet-mapping>
 		<servlet-name>indexServlet</servlet-name>
