@@ -37,7 +37,7 @@ public class CelularDAO extends AbstractDAO {
 		stmt.execute();
 		stmt.close();
 
-		return false;
+		return true;
 
 	}
 
