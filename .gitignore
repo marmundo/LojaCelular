@@ -1,2 +1,10 @@
 /build/
 /bin/
+.classpath
+.project
+*.prefs
+.jsdtscope
+*.component
+org.eclipse.wst.common.project.facet.core.xml
+*.container
+org.eclipse.wst.jsdt.ui.superType.name
