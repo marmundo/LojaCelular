@@ -22,4 +22,15 @@
 		<servlet-name>indexServlet</servlet-name>
 		<url-pattern>/celulares</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>cadastraCelularServlet</servlet-name>
+		<servlet-class>com.phonesaragao.servlet.AddCelularServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>cadastraCelularServlet</servlet-name>
+		<url-pattern>/cadastraCelular</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
