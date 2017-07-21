@@ -1,69 +1,132 @@
 package com.phonesaragao.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.PreparedStatement;
-import com.phonesaragao.dao.AbstractDAO;
-import com.phonesaragao.modelo.Celular;
+import com.phonesaragao.classes.Celular;
 
 public class CelularDAO extends AbstractDAO {
 
 	public CelularDAO() {
 		super();
-
 	}
 
-	public boolean inserir(Celular celular) throws SQLException {
-		String sql = "INSERT INTO celular(marca,modelo,memoria_ram,processador,velocidade_processador,preco,tamanho_tela,memoria_armazenamento,resolucao_camera_frontal,resolucao_camera_traseira) values (?,?,?,?,?,?,?,?,?,?)";
+	public boolean cadastrarCelular(Celular celular) {
 
-		PreparedStatement stmt = (PreparedStatement) conexao.prepareStatement(sql);
+		int cadastrado = 0;
 
-		// preenche os valores
-		
-		stmt.setString(1, celular.getMarca());
-		stmt.setString(2, celular.getModelo());
-		stmt.setDouble(3, celular.getMemoriaRam());
-		stmt.setString(4, celular.getProcessador());
-		stmt.setDouble(5, celular.getVelocidadeProcessador());
-		stmt.setDouble(6, celular.getPreco());
-		stmt.setDouble(7, celular.getTamanhoTela());
-		stmt.setDouble(8, celular.getMemoriaArmazenamento());
-		stmt.setDouble(9, celular.getResolucaoCameraFrontal());
-		stmt.setDouble(10, celular.getResolucaoCameraTraseira());
-		// executa
-		stmt.execute();
-		stmt.close();
+		PreparedStatement comando;
+		try {
+			comando = conexao.prepareStatement("INSERT INTO celular (marca, modelo, ram, processador, "
+					+ "velocidade_processador, preco, tela, armazenamento, camera_frontal, camera_traseira) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-		return false;
+			comando.setString(1, celular.getMarca());
+			comando.setString(2, celular.getModelo());
+			comando.setDouble(3, celular.getRam());
+			comando.setString(4, celular.getProcessador());
+			comando.setDouble(5, celular.getVelocidade_processador());
+			comando.setDouble(6, celular.getPreco());
+			comando.setDouble(7, celular.getTela());
+			comando.setInt(8, celular.getArmazenamento());
+			comando.setDouble(9, celular.getCamera_frontal());
+			comando.setDouble(10, celular.getCamera_traseira());
 
-	}
+			cadastrado = comando.executeUpdate();
 
-	public List<Celular> listarTodosCelulares() throws SQLException {
-
-		PreparedStatement stmt = null;
-		List<Celular> cs = new ArrayList<Celular>();
-		ResultSet rs;
-
-		String celularQuery = "select * from celular as c";
-		stmt = (PreparedStatement) conexao.prepareStatement(celularQuery);
-		rs = stmt.executeQuery();
-
-		while (rs.next()) {
-			Celular c = new Celular();
-			c.setMarca(rs.getString(2));
-			c.setModelo(rs.getString(3));
-			c.setMemoriaRam(rs.getDouble(4));
-			c.setProcessador(rs.getString(5));
-			c.setPreco(rs.getDouble(6));
-			c.setTamanhoTela(rs.getInt(7));
-			c.setMemoriaArmazenamento(rs.getInt(8));
-			c.setResolucaoCameraFrontal(rs.getDouble(9));
-			c.setResolucaoCameraTraseira(rs.getDouble(10));
-			cs.add(c);
+		} catch (SQLException e) {
+			cadastrado = 0;
+			System.out.println("\nErro: " + e);
 		}
-		return cs;
+
+		return cadastrado == 1;
+
 	}
+
+	public boolean removerCelular(Celular celular) {
+
+		int removido = 0;
+
+		PreparedStatement comando;
+		try {
+			comando = conexao
+					.prepareStatement("DELETE FROM celular WHERE marca = ? AND modelo = ?");
+
+			comando.setString(1, celular.getMarca());
+			comando.setString(2, celular.getModelo());
+
+			removido = comando.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("\nErro: " + e);
+		}
+
+		return removido == 1;
+
+	}
+
+	public boolean atualizarCelular(Celular celular, double novoPreco) {
+
+		int atualizado;
+
+		try {
+			PreparedStatement comando = conexao.prepareStatement(
+					"UPDATE celular SET preco = ? WHERE marca = ? AND modelo = ?");
+			
+			comando.setDouble(1, novoPreco);
+			comando.setString(2, celular.getMarca());
+			comando.setString(3, celular.getModelo());
+			
+			atualizado = comando.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			atualizado = 0;
+			System.out.println("\nErro: " + e);
+		}
+		
+		return atualizado == 1;
+
+	}
+	
+	public List<Celular> listarCelulares() {
+		Celular celular = null;
+		
+		List<Celular> lista = new ArrayList<Celular>();
+		
+		PreparedStatement comando;
+		try {
+			comando = conexao.prepareStatement("SELECT * FROM celular");
+			
+			ResultSet resultado = comando.executeQuery();
+			
+			while (resultado.next()) {
+				celular = new Celular();
+				
+				celular.setId(resultado.getInt("id"));
+				celular.setMarca(resultado.getString("marca"));
+				celular.setModelo(resultado.getString("modelo"));
+				celular.setRam(resultado.getDouble("ram"));
+				celular.setProcessador(resultado.getString("processador"));
+				celular.setVelocidade_processador(resultado.getDouble("velocidade_processador"));
+				celular.setPreco(resultado.getDouble("preco"));
+				celular.setTela(resultado.getDouble("tela"));
+				celular.setArmazenamento(resultado.getInt("armazenamento"));
+				celular.setCamera_frontal(resultado.getDouble("camera_frontal"));
+				celular.setCamera_traseira(resultado.getDouble("camera_traseira"));
+				
+				lista.add(celular);
+			}
+			
+		} catch (SQLException e) {
+			celular = null;
+			System.out.println("\nErro: " + e);
+		}
+		
+		return lista;
+		
+	}
+
 }

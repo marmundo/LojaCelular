@@ -1,33 +1,26 @@
 package com.phonesaragao.dao;
+
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Connection;
-
 public class AbstractDAO {
-	
-	public Connection conexao;
-	
-	public AbstractDAO(){
-		conexao=getConnection();
-	}
 
-	public Connection getConnection() {
+	protected Connection conexao;
+	
+	public AbstractDAO() {
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            return (Connection) DriverManager.getConnection(
-          "jdbc:mysql://localhost/loja_eletronicos", "aluno", "aluno");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+			conexao = DriverManager.getConnection("jdbc:mysql://localhost/eletronicos?useSSL=true", "root", "123456");
+		} catch (SQLException e) {
+			System.out.println("\nNão foi possível conectar ao banco: \n\t" + e);
+		}
 	}
 	
-	public void fechar(){
+	public void close() {
 		try {
 			conexao.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("\nErro ao finalizar conexão com o banco de dados \n\t" + e);
 		}
 	}
 
