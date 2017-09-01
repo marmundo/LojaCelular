@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.phonesaragao.classes.Celular;
+import com.phonesaragao.modelo.Celular;
 
 public class CelularDAO extends AbstractDAO {
 
@@ -21,7 +21,7 @@ public class CelularDAO extends AbstractDAO {
 		PreparedStatement comando;
 		try {
 			comando = conexao.prepareStatement("INSERT INTO celular (marca, modelo, ram, processador, "
-					+ "velocidade_processador, preco, tela, armazenamento, camera_frontal, camera_traseira) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					+ "velocidade_processador, preco, tela, armazenamento, camera_frontal, camera_traseira, url_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			comando.setString(1, celular.getMarca());
 			comando.setString(2, celular.getModelo());
@@ -33,6 +33,7 @@ public class CelularDAO extends AbstractDAO {
 			comando.setInt(8, celular.getArmazenamento());
 			comando.setDouble(9, celular.getCamera_frontal());
 			comando.setDouble(10, celular.getCamera_traseira());
+			comando.setString(11, celular.getUrl_img());
 
 			cadastrado = comando.executeUpdate();
 
@@ -116,6 +117,7 @@ public class CelularDAO extends AbstractDAO {
 				celular.setArmazenamento(resultado.getInt("armazenamento"));
 				celular.setCamera_frontal(resultado.getDouble("camera_frontal"));
 				celular.setCamera_traseira(resultado.getDouble("camera_traseira"));
+				celular.setUrl_img(resultado.getString("url_img"));
 				
 				lista.add(celular);
 			}

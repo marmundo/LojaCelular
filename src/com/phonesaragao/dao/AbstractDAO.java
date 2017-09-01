@@ -10,6 +10,7 @@ public class AbstractDAO {
 	
 	public AbstractDAO() {
 		try {
+			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			conexao = DriverManager.getConnection("jdbc:mysql://localhost/eletronicos?useSSL=true", "root", "123456");
 		} catch (SQLException e) {
 			System.out.println("\nNão foi possível conectar ao banco: \n\t" + e);

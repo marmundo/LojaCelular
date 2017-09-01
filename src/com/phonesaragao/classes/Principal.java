@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.phonesaragao.dao.CelularDAO;
+import com.phonesaragao.modelo.Celular;
 
 public class Principal {
 
@@ -55,6 +56,10 @@ public class Principal {
 
 				System.out.print("Informe a qualidade da câmera traseira: ");
 				celular.setCamera_traseira(input.nextDouble());
+				input.nextLine();
+				
+				System.out.println("Informe o endereço da imagem do celular: ");
+				celular.setUrl_img(input.nextLine());
 
 				CelularDAO cel_dao = new CelularDAO();
 
