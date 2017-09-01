@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Adicionar celular</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Última versão CSS compilada e minificada -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="style-adicionarCelular.css">
+<link rel="shortcut icon" href="resources/img/622.ico"
+	type="image/x-icon" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div>
+		<div>
+			<nav id="menu" class="navbar navbar-default navbar-fixed-top">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#myNavbar">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a href="index.html" class="navbar-left"><img height="50px"
+							src="resources/img/622.png"></a>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a href="/celulares">Listagem dos celulares</a></li>
+							<li class="active"><a href="adicionarCelular.html">Cadastrar celular</a></li>
+						</ul>
+						<form class="navbar-form navbar-right" role="search">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Pesquisar">
+							</div>
+							<button type="submit" class="btn btn-inverse">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div id="celular" class="container">
+			<!-- DIV criada para colocar transparência no formulário -->
+			<div id="formulario">
+				<form id="contato-formulario" method='post' action="cadastraCelular"
+					method="post" accept-charset="utf-8">
+					<div class="form-group">
+						<label for="marca" id="label-marca">Marca:</label> <input type="text"
+							class="form-control" name="marca" placeholder="Apple">
+					</div>
+					<div class="form-group">
+						<label for="modelo" id="label-modelo">Modelo:</label> <input type="text" name="modelo"
+							class="form-control" placeholder="iPhone">
+					</div>
+					<div class="form-group">
+						<label for="ram" id="label-ram">Memória RAM:</label> <input type="number"
+							class="form-control" name="ram" placeholder="2GB">
+					</div>
+					<div class="form-group">
+						<label for="processador" id="label-processador">Processador:</label> <input type="text"
+							class="form-control" name="processador" placeholder="Octa-core">
+					</div>
+					<div class="form-group">
+						<label for="velocidade_processador" id="label-velocidade_processador">Velocidade do processador:</label> <input type="number"
+							class="form-control" name="velocidade_processador" placeholder="2GHz">
+					</div>
+					<div class="form-group">
+						<label for="preco" id="label-preco">Preço:</label> <input type="number"
+							class="form-control" name="preco" placeholder="R$1200,00">
+					</div>
+					<div class="form-group">
+						<label for="tela" id="label-tela">Tela:</label> <input type="number"
+							class="form-control" name="tela" placeholder="5,5'">
+					</div>
+					<div class="form-group">
+						<label for="armazenamento" id="label-armazenamento">Armazenamento:</label> <input type="number"
+							class="form-control" name="armazenamento" placeholder="32GB">
+					</div>
+					<div class="form-group">
+						<label for="camera_frontal" id="label-camera_frontal">Câmera frontal:</label> <input type="number"
+							class="form-control" name="camera_frontal" placeholder="5px">
+					</div>
+					<div class="form-group">
+						<label for="camera_traseira" id="label-camera_traseira">Câmera traseira:</label> <input type="number"
+							class="form-control" name="camera_traseira" placeholder="8px">
+					</div>
+					<div class="form-group">
+						<label for="url_img" id="label-url_img">URL:</label> <input type="text"
+							class="form-control" name="url_img" placeholder="imagem.jpg">
+					</div>
+					
+					<div id="botoes">
+						<!-- Botão de limpar o form -->
+						<button type="reset" class="btn btn-danger" id="limpar-form">
+							<!-- Ícone -->
+							<span class="glyphicon glyphicon-erase"></span> Limpar os dados
+						</button>
+						<!-- Botão de enviar o form -->
+						<button type="submit" class="btn btn-success" name="cadastrar">
+							<!-- Ícone -->
+							<span class="glyphicon glyphicon-floppy-saved"></span> Cadastrar Celular
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<footer id="footer">
+		<div class="container">
+			<div class="row copyright text-center">
+				<div class="col-md-12">
+					<p id="desenvolvedor" class="roboto">
+						Copyright &copy;2017 - <a href="https://github.com/jancywdson"
+							target="_blank">Phones Aragão</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+</body>
+</html>

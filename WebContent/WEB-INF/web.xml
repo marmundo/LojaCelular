@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>LojaCelularForked</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>servletAragao</servlet-name>
+		<servlet-class>com.phonesaragao.servlet.ServletAragao</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>servletAragao</servlet-name>
+		<url-pattern>/celulares</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>cadastraCelularServlet</servlet-name>
+		<servlet-class>com.phonesaragao.servlet.AddCelularServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>cadastraCelularServlet</servlet-name>
+		<url-pattern>/cadastraCelular</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>thayseee</servlet-name>
+		<servlet-class>com.phonesaragao.servlet.CelularServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>thayseee</servlet-name>
+		<url-pattern>/celular</url-pattern>
+	</servlet-mapping>
+	
+
+</web-app>

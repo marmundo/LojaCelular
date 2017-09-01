@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -119,19 +120,45 @@ public class ServletAragao extends HttpServlet {
 		String auxiliar;
 		String inicio;
 		String fim;
-
+		String nomeDoProjeto=this.getServletContext().getContextPath();
+		System.out.println(nomeDoProjeto);
 		for (Celular celular : listaCelular) {
 			inicio = "<div class='col-sm-4 col-md-2'>" + "<div class='thumbnail'>";
 			imgCelular = "<img src='" + celular.getUrl_img() + "' height=\"100\" width=\"150\"/>";
 			auxiliar = "<div class=\"caption\">";
 			modeloCelular = "<h3 id='modelo'>" + celular.getModelo() + "</h3>";
 			precoCelular = "<h3 id='preco'>R$" + celular.getPreco() + "0</h3>";
-			fim = "<p><a href='#' class='btn btn-primary' role='button'>Ver mais</a></p>" + "</div>"
+			fim = "<p><a href='"+nomeDoProjeto+"/celular?id="+'"'+celular.getId()+ '"'+ "' class='btn btn-primary' role='button'>Ver mais</a></p>" + "</div>"
 				+ "</div>" + "</div>";
+			System.out.println(fim);
 			listaCelularString = listaCelularString + inicio + imgCelular + auxiliar + modeloCelular + precoCelular + fim;
 		}
 
 		return listaCelularString;
+	}
+
+	public String getListarCelular(Celular celular) {
+		String listaCelularString = "";
+		String modeloCelular = "";
+		String imgCelular = "";
+		String precoCelular;
+		String auxiliar;
+		String inicio;
+		String fim;
+			inicio = "<div class='col-sm-4 col-md-2'>" + "<div class='thumbnail'>";
+			imgCelular = "<img src='" + celular.getUrl_img() + "' height=\"100\" width=\"150\"/>";
+			auxiliar = "<div class=\"caption\">";
+			modeloCelular = "<h3 id='modelo'>" + celular.getModelo() + "</h3>";
+			precoCelular = "<h3 id='preco'>R$" + celular.getPreco() + "0</h3>";
+			String resolucaoCameraTraseira = "<h3 id='resolucaoCameraTraseira'>Resolução Camera Traseira: " + celular.getCamera_traseira()+"MP</h3>";
+			String processador= "<h3 id='processador'>Processador: " + celular.getProcessador()+"</h3>";
+			fim = "</div>"
+				+ "</div>" + "</div>";
+			listaCelularString = listaCelularString + inicio + imgCelular + auxiliar + modeloCelular + precoCelular + resolucaoCameraTraseira+ processador+ fim;
+		
+
+		return listaCelularString;
+	
 	}
 
 }

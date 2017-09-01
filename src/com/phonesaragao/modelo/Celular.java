@@ -1,4 +1,4 @@
-package com.phonesaragao.classes;
+package com.phonesaragao.modelo;
 
 public class Celular {
 
@@ -13,12 +13,13 @@ public class Celular {
 	private int armazenamento;
 	private double camera_frontal;
 	private double camera_traseira;
+	private String url_img;
 
 	public Celular() {
 	}
 
 	public Celular(int id, String marca, String modelo, double ram, String processador, double velocidade_processador, double preco,
-			double tela, int armazenamento, double camera_frontal, double camera_traseira) {
+			double tela, int armazenamento, double camera_frontal, double camera_traseira, String url_img) {
 
 		this.id = id;
 		this.marca = marca;
@@ -31,6 +32,7 @@ public class Celular {
 		this.armazenamento = armazenamento;
 		this.camera_frontal = camera_frontal;
 		this.camera_traseira = camera_traseira;
+		this.url_img = url_img;
 		
 	}
 
@@ -120,6 +122,14 @@ public class Celular {
 
 	public void setCamera_traseira(double camera_traseira) {
 		this.camera_traseira = camera_traseira;
+	}
+	
+	public String getUrl_img() {
+		return url_img;
+	}
+
+	public void setUrl_img(String url_img) {
+		this.url_img = url_img;
 	}
 
 	@Override

@@ -52,8 +52,7 @@ public class CelularDAO extends AbstractDAO {
 
 		PreparedStatement comando;
 		try {
-			comando = conexao
-					.prepareStatement("DELETE FROM celular WHERE marca = ? AND modelo = ?");
+			comando = conexao.prepareStatement("DELETE FROM celular WHERE marca = ? AND modelo = ?");
 
 			comando.setString(1, celular.getMarca());
 			comando.setString(2, celular.getModelo());
@@ -73,39 +72,38 @@ public class CelularDAO extends AbstractDAO {
 		int atualizado;
 
 		try {
-			PreparedStatement comando = conexao.prepareStatement(
-					"UPDATE celular SET preco = ? WHERE marca = ? AND modelo = ?");
-			
+			PreparedStatement comando = conexao
+					.prepareStatement("UPDATE celular SET preco = ? WHERE marca = ? AND modelo = ?");
+
 			comando.setDouble(1, novoPreco);
 			comando.setString(2, celular.getMarca());
 			comando.setString(3, celular.getModelo());
-			
+
 			atualizado = comando.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			atualizado = 0;
 			System.out.println("\nErro: " + e);
 		}
-		
+
 		return atualizado == 1;
 
 	}
-	
+
 	public List<Celular> listarCelulares() {
 		Celular celular = null;
-		
+
 		List<Celular> lista = new ArrayList<Celular>();
-		
+
 		PreparedStatement comando;
 		try {
 			comando = conexao.prepareStatement("SELECT * FROM celular");
-			
+
 			ResultSet resultado = comando.executeQuery();
-			
+
 			while (resultado.next()) {
 				celular = new Celular();
-				
+
 				celular.setId(resultado.getInt("id"));
 				celular.setMarca(resultado.getString("marca"));
 				celular.setModelo(resultado.getString("modelo"));
@@ -118,17 +116,54 @@ public class CelularDAO extends AbstractDAO {
 				celular.setCamera_frontal(resultado.getDouble("camera_frontal"));
 				celular.setCamera_traseira(resultado.getDouble("camera_traseira"));
 				celular.setUrl_img(resultado.getString("url_img"));
-				
+
 				lista.add(celular);
 			}
-			
+
 		} catch (SQLException e) {
 			celular = null;
 			System.out.println("\nErro: " + e);
 		}
-		
+
 		return lista;
-		
+
+	}
+
+	public Celular getCelular(String idCelular) {
+
+		Celular celular = null;
+
+		PreparedStatement comando;
+		try {
+			comando = conexao.prepareStatement("SELECT * FROM celular WHERE id=" + idCelular);
+
+			ResultSet resultado = comando.executeQuery();
+
+			while (resultado.next()) {
+				celular = new Celular();
+
+				celular.setId(resultado.getInt("id"));
+				celular.setMarca(resultado.getString("marca"));
+				celular.setModelo(resultado.getString("modelo"));
+				celular.setRam(resultado.getDouble("ram"));
+				celular.setProcessador(resultado.getString("processador"));
+				celular.setVelocidade_processador(resultado.getDouble("velocidade_processador"));
+				celular.setPreco(resultado.getDouble("preco"));
+				celular.setTela(resultado.getDouble("tela"));
+				celular.setArmazenamento(resultado.getInt("armazenamento"));
+				celular.setCamera_frontal(resultado.getDouble("camera_frontal"));
+				celular.setCamera_traseira(resultado.getDouble("camera_traseira"));
+				celular.setUrl_img(resultado.getString("url_img"));
+
+				return celular;
+			}
+
+		} catch (SQLException e) {
+			celular = null;
+			System.out.println("\nErro: " + e);
+		}
+		return celular;
+
 	}
 
 }
